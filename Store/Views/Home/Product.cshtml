@@ -1,0 +1,13 @@
+﻿@model ProductTable
+@{
+}
+<form asp-action="Cart" method="post">
+    <div>
+        <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.ProductImg)" />
+        <label>
+            @Model.Name
+        </label>
+        <p>@Model.Description</p>
+        <input type="submit" value="Add to Cart"/>
+    </div>
+</form>

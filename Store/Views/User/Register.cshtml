@@ -1,0 +1,17 @@
+﻿@model UserTable
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="main-container">
+    <h1>Register</h1>
+    <form asp-action="Register" method="post">
+        <div class="text-container">
+            <lable>@ViewBag.message</lable>
+            <input asp-for="Username" type="text" placeholder="Username" />
+            <input asp-for="Password" type="Password" placeholder="Password" />
+            <input name="confirmPassword" type="Password" placeholder="Confirm Password" />
+            <button type="submit">SignUp</button>
+        </div>
+    </form>
+</div>
