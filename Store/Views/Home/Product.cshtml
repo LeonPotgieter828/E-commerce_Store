@@ -2,7 +2,7 @@
 @{
 }
 <form asp-action="Cart" method="post">
-    <div>
+    <div class="product-container">
         <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.ProductImg)" />
         <label>
             @Model.Name
@@ -11,3 +11,13 @@
         <input type="submit" value="Add to Cart"/>
     </div>
 </form>
+
+
+<style>
+    .product-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+    }
+</style>

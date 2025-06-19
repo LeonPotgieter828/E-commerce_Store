@@ -10,24 +10,20 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Store</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="User" asp-action="Index">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"  asp-controller="User" asp-action="Register">Register</a>
-                        </li>
-                    </ul>
+        <nav class="nav-container">      
+                <a class="navbar-brand" style="margin: 0; vertical-align: middle" asp-area="" asp-controller="Home" asp-action="Index">Store</a> 
+                <div class="search-bar">
+                    <input type="text" placeholder="Search"/>
+                    <button>icon</button>
                 </div>
-            </div>
+                    <ul class="nav-items">
+                        <li>
+                            <a asp-controller="User" asp-action="Index">Login</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Home" asp-action="Cart">Cart</a>
+                        </li>
+                    </ul>         
         </nav>
     </header>
     <div class="container">
@@ -47,3 +43,45 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<style>
+    .nav-container{
+        display: flex;
+        width: 100%;
+        height: 80px;
+        align-content: center;
+        justify-content: space-between;
+        padding-left: 50px;
+        padding-right: 50px;
+        border-bottom: solid 1.2px black;
+    }
+
+    .nav-items{
+        display: flex;
+        column-gap: 12px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .nav-items li{
+        list-style: none;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .nav-items li a{
+        vertical-align: middle;
+        color: black;
+    }
+
+    .search-bar{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .search-bar input{
+        width: 400px;
+        height: 30px;
+    }
+</style>

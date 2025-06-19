@@ -28,7 +28,7 @@ namespace Store.Controllers
         public IActionResult Cart(CartViewModel cartModel)
         {
             int getID = Convert.ToInt32(Request.Cookies["UserID"]);
-
+            ViewBag.ID = getID;
             if (getID > 0)
             {
                 cartModel = general.Model(_context, getID);

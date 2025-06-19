@@ -3,31 +3,35 @@
     ViewData["Title"] = "Cart";
 }
 
-
-<div class="cart">
-    @for(int i = 0; i < Model.Products.Count; i++)
-    {
-        <div class="item-box">
-            <div class="item-info">
-                <label>@Model.Products[i].Name</label>
-                <label>@Model.Products[i].Price</label>
-                <div>
-                    <button onclick="changeCount(1)">+</button>
-                        <input type="hidden" id="hiddenCount" value="quantity"/>
-                        <lable id="quantity">@Model.Quantity[i]</lable>
-                    <button onclick="changeCount(-1)">-</button>
+@if(ViewBag.ID != 0){
+    <div class="cart">
+        @for(int i = 0; i < Model.Products.Count; i++)
+        {
+            <div class="item-box">
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Products[i].ProductImg)" />
+                <div class="item-info">
+                    <label>@Model.Products[i].Name</label>
+                    <label>@Model.Products[i].Price</label>
+                    <div>
+                        <button onclick="changeCount(1)">+</button>
+                            <input type="hidden" id="hiddenCount" value="quantity"/>
+                            <lable id="quantity">@Model.Quantity[i]</lable>
+                        <button onclick="changeCount(-1)">-</button>
+                    </div>
                 </div>
+                <button>Delete</button>
             </div>
-            <button>Delete</button>
-        </div>
-
-    }
-
-    <label>Cart Total @Model.Total</label>
-    <button>Checkout</button>
-</div>
-
-
+        }
+        <label>Cart Total @Model.Total</label>
+        <button>Checkout</button>
+    </div>
+}
+else
+{
+    <div style="width: 80%; display: flex; align-items: center; justify-content: center">
+        @Html.Partial("_LoginPartial")
+    </div>
+}
 
 
 
@@ -40,11 +44,30 @@
         justify-content: center;
     }
 
+    .item-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 5px;
+        border: solid 1px black;
+        border-radius: 15px;
+        padding-left: 5px;
+    }
+
+    .item-box img{
+        width: 100px;
+        height: 100px;
+    }
+
     .item-info{
         display: flex;
         flex-direction: column;
+        width: 300px;
+        height: 140px;
         row-gap: 8px;
-        align-items: center;
+        align-items: start;
+        justify-content: center;
+        padding: 10px
     }
 
 </style>
