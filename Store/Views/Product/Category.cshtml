@@ -1,0 +1,59 @@
+﻿@model List<ProductTable>
+@{
+}
+
+<div class="main-container">
+    <div class="products-container">
+        @foreach (var item in Model)
+        {
+            <a asp-action="Product" asp-controller="Home" asp-route-productID="@item.ProductID">
+                <form class="product" asp-action="Cart" asp-controller="Home" method="post">
+                    <input type="hidden" name="productID" value="@item.ProductID" />
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.ProductImg)" />
+                    <lable>@item.Name</lable>
+                    <lable>R @item.Price</lable>
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </a>
+        }
+    </div>
+</div>
+
+<style>
+    .main-container {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .products-container {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 15px;
+    }
+
+    .product {
+        width: 280px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 14px;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .product lable {
+            text-align: center;
+        }
+
+        .product img {
+            width: 200px;
+            height: 200px
+        }
+</style>

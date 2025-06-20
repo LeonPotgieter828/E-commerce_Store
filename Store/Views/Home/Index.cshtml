@@ -5,9 +5,25 @@
 }
 
 <div class="main-container">
-    <h1>Welcome to Store</h1>
-    <div class="search-bar">
-        <input type="text" placeholder="Search"/>
+    <div class="categories">
+        <div class="category">
+            <a asp-action="Category" asp-controller="Product" asp-route-category="TVs">
+                <img />
+                <label>TVs</label>
+            </a>
+        </div>
+        <div class="category">
+            <a asp-action="Category" asp-controller="Product" asp-route-category="Laptops">
+                <img />
+                <label>Laptops</label>
+            </a>
+        </div>
+        <div class="category">
+            <a asp-action="Category" asp-controller="Product" asp-route-category="Gaming">
+                <img />
+                <label>Gaming</label>
+            </a>
+        </div>
     </div>
         <div class="products-container">
             @foreach(var item in Model)
@@ -39,6 +55,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding-top: 100px;
+        padding-bottom: 100px;
     }
 
     .products-container{
@@ -48,6 +66,10 @@
         align-items: center;
         justify-content: space-between;
         column-gap: 15px;
+    }
+    
+    .products-container a{
+        border: solid 1.3px black;
     }
 
     .product{
@@ -64,7 +86,24 @@
     }
 
     .product img{
-        width: 80%;
+       width: 200px;
+       height: 200px
     }
 
+
+    .categories{
+        display: flex;
+        width: 70%;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 50px;
+    }
+
+    .category{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 8px;
+    }
 </style>

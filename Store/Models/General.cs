@@ -20,7 +20,6 @@ namespace Store.Models
 
         public void AddToCart(StoreContext _context, CartTable cart, int productID, int getID)
         {
-                int quantity = 1;
                 var getCart = _context.CartTable.Where(x => x.UserID == getID);
                 var products = getCart.Select(x => x.ProductID);
                 var getProduct = _context.ProductTable.FirstOrDefault(x => x.ProductID == productID);
@@ -28,14 +27,14 @@ namespace Store.Models
                 if (products.Contains(productID))
                 {
                     var cartProduct = _context.CartTable.FirstOrDefault(x => x.ProductID == productID);
-                    cartProduct.Quantity += quantity;
+                    cartProduct.Quantity++;
                 }
                 else
                 {
                     cart.ProductID = getProduct.ProductID;
                     cart.UserID = getID;
                     cart.Price = getProduct.Price;
-                    cart.Quantity = quantity;
+                    cart.Quantity = 1;
                     _context.CartTable.Add(cart);
                 }
                 _context.SaveChanges();

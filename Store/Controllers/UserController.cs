@@ -14,8 +14,8 @@ namespace Store.Controllers
 
         public IActionResult Index(string username, string password)
         {
-            var getUser = _context.UserTable.FirstOrDefault(x => x.Username == username || x.Password == password);
-            if (getUser != null)
+            var getUser = _context.UserTable.FirstOrDefault(x => x.Username == username);
+            if (getUser != null && getUser.Password == password)
             {
                 var cookie = new CookieOptions
                 {
