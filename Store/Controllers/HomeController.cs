@@ -11,6 +11,7 @@ namespace Store.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly StoreContext _context;
         private General general = new General();
+        private List<ProductTable> products = new List<ProductTable>();
 
         public HomeController(ILogger<HomeController> logger, StoreContext context)
         {
@@ -20,8 +21,15 @@ namespace Store.Controllers
 
         public IActionResult Index()
         {
-            var list = _context.ProductTable.ToList();
-            return View(list);
+            products = _context.ProductTable.ToList();
+            return View(products);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string search)
+        {
+            products = _context.ProductTable.Where(x => x.Name.Contains(search) || x.Category == search).ToList();
+            return View(products);
         }
 
         [HttpGet]

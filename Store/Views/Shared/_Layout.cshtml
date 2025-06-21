@@ -12,10 +12,12 @@
     <header>
         <nav class="nav-container">      
                 <a class="navbar-brand" style="margin: 0; vertical-align: middle" asp-area="" asp-controller="Home" asp-action="Index">Store</a> 
-                <div class="search-bar">
-                    <input type="text" placeholder="Search"/>
-                    <button>icon</button>
-                </div>
+                <form asp-controller="Home" asp-action="Index" method="post">
+                    <div class="search-bar">
+                        <input name="search" type="text" placeholder="Search"/>
+                        <input type="submit" value="Icon"/>
+                    </div>
+                </form>
                     <ul class="nav-items">
                         <li>
                             <a asp-controller="User" asp-action="Index">Login</a>
