@@ -63,6 +63,14 @@ namespace Store.Controllers
             return View(getProduct);
         }
 
+        public IActionResult Delete(int productId)
+        {
+            var getCart = _context.CartTable.FirstOrDefault(c => c.ProductID == productId);
+            _context.CartTable.Remove(getCart);
+            _context.SaveChanges();
+            return RedirectToAction("Cart");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

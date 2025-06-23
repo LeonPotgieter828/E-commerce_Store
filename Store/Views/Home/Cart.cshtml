@@ -7,20 +7,23 @@
     <div class="cart">
         @for(int i = 0; i < Model.Products.Count; i++)
         {
-            <div class="item-box">
-                <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Products[i].ProductImg)" />
-                <div class="item-info">
-                    <label>@Model.Products[i].Name</label>
-                    <label>@Model.Products[i].Price</label>
-                    <div>
-                        <button onclick="changeCount(1)">+</button>
-                            <input type="hidden" id="hiddenCount" value="quantity"/>
-                            <lable id="quantity">@Model.Quantity[i]</lable>
-                        <button onclick="changeCount(-1)">-</button>
+            <form asp-action="Delete">
+                <div class="item-box">
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Products[i].ProductImg)" />
+                    <div class="item-info">
+                        <input name="productId" type="hidden" value="@Model.Products[i].ProductID"/>
+                        <label>@Model.Products[i].Name</label>
+                        <label>@Model.Products[i].Price</label>
+                        <div>
+                            <button onclick="changeCount(1)">+</button>
+                                <input type="hidden" id="hiddenCount" value="quantity"/>
+                                <lable id="quantity">@Model.Quantity[i]</lable>
+                            <button onclick="changeCount(-1)">-</button>
+                        </div>
                     </div>
+                    <input type="submit" value="Delete" />
                 </div>
-                <button>Delete</button>
-            </div>
+            </form>
         }
         <label>Cart Total @Model.Total</label>
         <button>Checkout</button>
