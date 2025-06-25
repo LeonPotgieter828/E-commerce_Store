@@ -7,23 +7,27 @@
     <div class="cart">
         @for(int i = 0; i < Model.Products.Count; i++)
         {
-            <form asp-action="Delete">
+            var product = Model.Products[i];
+            var quantity = Model.Quantity[i];
+
+            @* <form asp-action="Delete"> *@
                 <div class="item-box">
-                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Products[i].ProductImg)" />
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(product.ProductImg)" />
                     <div class="item-info">
-                        <input name="productId" type="hidden" value="@Model.Products[i].ProductID"/>
-                        <label>@Model.Products[i].Name</label>
-                        <label>@Model.Products[i].Price</label>
+                        <input name="productId" type="hidden" value="@product.ProductID"/>
+                        <label>@product.Name</label>
+                        <label>@product.Price</label>
                         <div>
-                            <button onclick="changeCount(1)">+</button>
-                                <input type="hidden" id="hiddenCount" value="quantity"/>
-                                <lable id="quantity">@Model.Quantity[i]</lable>
-                            <button onclick="changeCount(-1)">-</button>
+                                <button onclick="updateQuantity(@product.ProductID, 1, @i)">+</button>
+                                    <input type="hidden" id="quantity-@i" value="@quantity" />
+                                    <label id="quantity" name="quantity">@Model.Quantity[i]</label>
+                                <button onclick="updateQuantity(@product.ProductID, -1, @i)">-</button>                         
                         </div>
                     </div>
+                    <input type="hidden" id="hiddenCount" value="@Model.Quantity[i]" />
                     <input type="submit" value="Delete" />
                 </div>
-            </form>
+           @*  </form> *@
         }
         <label>Cart Total @Model.Total</label>
         <button>Checkout</button>
@@ -76,18 +80,17 @@ else
 </style>
 
 <script>
-    let count = document.getElementById('quantity').textContent;
 
-    function changeCount(amount){
-        fext('/Home/Cart', {
-            method: 'Get'
-        })
+         let q = parseInt(document.getElementById('quantity').value)
+    
 
-        
+        function updateQuantity(productId, amount, index){
+        const input = document.getElementById(`quantity-${index}`);
+        let count = parseInt(input.value);
 
-    count += amount;
-    if (count < 0) count = 0;
-        document.getElementById('quantity').textContent = count;
-        document.getElementById('hiddenCount').value = count;
-    }
+            count = count + amount;
+            window.location.href = `/Home/UpdateQuantity?quantity=${count}&productId=${productId}`;
+
+        }
+
 </script>

@@ -5,14 +5,69 @@
     ViewData["Title"] = "Login";
 }
 
-<div>
+<div class="main-container">
     <h1>Login</h1>
     <form asp-action="Index">
-        <div>
+        <div class="login-main">
             <lable>@ViewBag.message</lable>
-            <input name="username" type="text" placeholder="Username" />
-            <input name="password" type="Password" placeholder="Password" />
+            <label id="em">Email</label>
+            <input for="em" name="username" type="text" placeholder="Username" />
+            <label id="ps">Password</label>
+            <input for="ps" name="password" type="Password" placeholder="Password" />
             <button type="submit">Login</button>
         </div>
     </form>
 </div>
+
+
+<style>
+    .main-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 50px;
+        justify-content: center;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    h1{
+        font-size: 32px;
+    }
+
+    .login-main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+    }
+
+
+    .login-main input{
+        margin-bottom: 10px;
+    }
+
+    label{
+        font-size: 12px;
+        margin-bottom: 4px;
+        text-align: left;
+        width: 100%;
+    }
+
+    button{
+        width: 100%;
+        background-color: dodgerblue;
+        font-size: 16px;
+        padding: 4px 0;
+        border: none;
+        color: white;
+        margin-top: 10px;
+        trasition: 1s;
+    }
+
+    button:hover{
+        background-color: transparent;
+        border: solid dodgerblue 1.5px;
+        color: Black;
+    }
+</style>

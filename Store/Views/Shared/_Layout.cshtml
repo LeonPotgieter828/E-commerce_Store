@@ -9,36 +9,42 @@
     <link rel="stylesheet" href="~/Store.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="nav-container">      
-                <a class="navbar-brand" style="margin: 0; vertical-align: middle" asp-area="" asp-controller="Home" asp-action="Index">Store</a> 
-                <form asp-controller="Home" asp-action="Index" method="post">
-                    <div class="search-bar">
-                        <input name="search" type="text" placeholder="Search"/>
-                        <input type="submit" value="Icon"/>
-                    </div>
-                </form>
-                    <ul class="nav-items">
-                        <li>
-                            <a asp-controller="User" asp-action="Index">Login</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Home" asp-action="Cart">Cart</a>
-                        </li>
-                    </ul>         
-        </nav>
-    </header>
-    <div class="container">
+    @{
+      string data = ViewData["Title"].ToString();
+
+        if (data != "Login" && data != "Register" && data != "Cart")
+    {
+        <header>
+            <nav class="nav-container">      
+                    <a class="navbar-brand" style="margin: 0; vertical-align: middle" asp-area="" asp-controller="Home" asp-action="Index">Store</a>
+                    <form class="search-bar" asp-controller="Home" asp-action="Index" method="post">               
+                            <input name="search" type="text" placeholder="Search"/>
+                            <input type="submit" value="Icon"/>
+                    
+                    </form>
+                        <ul class="nav-items">
+                            <li>
+                                <a asp-controller="User" asp-action="Index">Login</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Cart">Cart</a>
+                            </li>
+                        </ul>         
+            </nav>
+        </header>    
+    }
+    }
+    <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - Store - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -69,11 +75,13 @@
         list-style: none;
         display: flex;
         justify-content: center;
+        align-items: center;
     }
     
     .nav-items li a{
         vertical-align: middle;
         color: black;
+        text-decoration: none;
     }
 
     .search-bar{

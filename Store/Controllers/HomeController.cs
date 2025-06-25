@@ -38,7 +38,7 @@ namespace Store.Controllers
             int getID = Convert.ToInt32(Request.Cookies["UserID"]);
             ViewBag.ID = getID;
             if (getID > 0)
-            {
+            {  
                 cartModel = general.Model(_context, getID);
             }
 
@@ -54,6 +54,25 @@ namespace Store.Controllers
                 general.AddToCart(_context, cart, productID, getID);
             }
             return RedirectToAction("Index");
+        }
+
+        public IActionResult UpdateQuantity(int quantity, int productId)
+        {
+            var userID = Convert.ToInt32(Request.Cookies["UserID"]);
+            var cart = _context.CartTable.Where(x => x.UserID == userID);
+            var getProduct = cart.FirstOrDefault(x => x.ProductID == productId);
+
+            if (getProduct != null)
+            {
+                getProduct.Quantity = quantity;
+                if (getProduct.Quantity == 0)
+                {
+                    _context.CartTable.Remove(getProduct);
+                }
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Cart");
         }
 
         [HttpGet]
