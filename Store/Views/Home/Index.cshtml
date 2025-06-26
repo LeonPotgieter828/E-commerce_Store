@@ -1,30 +1,37 @@
 ﻿@model List<ProductTable>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
 <div class="main-container">
     <div class="categories">
         <div class="category">
             <a asp-action="Category" asp-controller="Product" asp-route-category="TVs">
-                <img />
+                <div class="icon">
+                    <img src="images/television.png" />
+                </div>
                 <label>TVs</label>
             </a>
         </div>
         <div class="category">
             <a asp-action="Category" asp-controller="Product" asp-route-category="Laptops">
-                <img />
+                <div class="icon">
+                    <img src="images/laptop.png"/>
+                </div>
                 <label>Laptops</label>
             </a>
         </div>
         <div class="category">
             <a asp-action="Category" asp-controller="Product" asp-route-category="Gaming">
-                <img />
+                <div class="icon">
+                    <img src="images/games.png" />
+                </div>
                 <label>Gaming</label>
             </a>
         </div>
     </div>
+
         <div class="products-container">
             @foreach(var item in Model)
             {
@@ -32,7 +39,9 @@
                     <a asp-action="Product" asp-route-productID="@item.ProductID">
                         <form class="product" asp-action="Cart" method="post">
                             <input type="hidden" name="productID" value="@item.ProductID" />
-                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.ProductImg)"/>
+                            <div class="img-box">
+                                <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.ProductImg)"/>
+                            </div>
                             <lable>@item.Name</lable>
                             <lable>R @item.Price</lable>
                             <button type="submit">Add to Cart</button>
@@ -70,8 +79,21 @@
     }
     
     .products-container a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: solid 1.3px black;
+        background-color: whitesmoke;
         margin-bottom: 50px;
+        width: 320px;
+        padding: 10px 0;
+        transition: 1s;
+        color: black;
+    }
+
+    .products-container a:hover{
+        box-shadow: 0 0 10px rgba(0,0,0,0.7);
+        border: transparent;
     }
 
     .product{
@@ -88,25 +110,57 @@
         text-align: center;
     }
 
+    .img-box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+       object-fit: contain;
+    }
+
     .product img{
-       width: 200px;
-       height: 200px
+       width: 100%;  
     }
 
 
     .categories{
-        display: flex;
         width: 70%;
+        display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 50px;
+        color: white;
+    }
+    
+    .categories label{
+        color: white;
+        text-align: center;
     }
 
-    .category{
+    .category a{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         row-gap: 8px;
+        border-radius: 20px;
+        padding: 10px;
+        background-color: rgba(0,100,200,0.4);
+        width: 130px;
+        height: 130px;
+    }
+
+    .icon
+    {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon img{
+        width: 100%;
     }
 </style>
