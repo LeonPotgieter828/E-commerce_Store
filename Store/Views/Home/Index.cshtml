@@ -35,10 +35,9 @@
         <div class="products-container">
             @foreach(var item in Model)
             {
-
                     <a asp-action="Product" asp-route-productID="@item.ProductID">
                         <form class="product" asp-action="Cart" method="post">
-                            <input type="hidden" name="productID" value="@item.ProductID" />
+                            <input type="hidden" name="productID" value="@item.ProductID"/>
                             <div class="img-box">
                                 <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.ProductImg)"/>
                             </div>
